@@ -67,18 +67,18 @@ const MemoriesPage = () => {
 
   return (
     <Layout>
-      <section className="py-8 bg-echo-sepia/10">
+      <section className="py-8 bg-echo-sepia/10 dark:bg-echo-dark-background/20">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div>
-              <h1 className="text-3xl font-semibold text-echo-coffee flex items-center gap-2">
-                <BookMarked className="text-echo-rust" />
+              <h1 className="text-3xl font-semibold text-echo-coffee dark:text-echo-cyber-neon flex items-center gap-2">
+                <BookMarked className="text-echo-rust dark:text-echo-cyber-electric" />
                 Soul bound Memories
               </h1>
-              <p className="text-echo-coffee/70">Preserve your most precious moments forever</p>
+              <p className="text-echo-coffee/70 dark:text-echo-cyber-neon/80">Preserve your most precious moments forever</p>
             </div>
             <Link to="/create/memory">
-              <Button className="bg-echo-rust hover:bg-echo-rust/90 text-white">
+              <Button className="bg-echo-rust hover:bg-echo-rust/90 dark:bg-echo-cyber-neon dark:hover:bg-echo-cyber-neon/90 text-white">
                 <Plus size={16} className="mr-2" />
                 Create Memory
               </Button>
@@ -91,13 +91,13 @@ const MemoriesPage = () => {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row gap-4 mb-8">
             <div className="relative flex-grow">
-              <Search size={18} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-echo-coffee/50" />
+              <Search size={18} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-echo-coffee/50 dark:text-echo-cyber-neon/50" />
               <Input 
                 placeholder="Search memories..." 
-                className="pl-10 border-echo-sepia/30 focus-visible:ring-echo-clay"
+                className="pl-10 border-echo-sepia/30 dark:border-echo-cyber-neon/20 focus-visible:ring-echo-clay dark:focus-visible:ring-echo-cyber-neon"
               />
             </div>
-            <Button variant="outline" className="border-echo-clay text-echo-clay hover:bg-echo-clay/10">
+            <Button variant="outline" className="border-echo-clay text-echo-clay hover:bg-echo-clay/10 dark:border-echo-cyber-neon dark:text-echo-cyber-neon dark:hover:bg-echo-cyber-neon/10">
               <Filter size={16} className="mr-2" />
               Filters
             </Button>
@@ -115,13 +115,13 @@ const MemoriesPage = () => {
           
           {memories.length === 0 && (
             <div className="text-center py-12">
-              <BookMarked size={48} className="mx-auto text-echo-sepia mb-4" />
-              <h3 className="text-xl font-medium text-echo-coffee mb-2">No memories yet</h3>
-              <p className="text-echo-coffee/70 mb-6">
+              <BookMarked size={48} className="mx-auto text-echo-sepia dark:text-echo-cyber-neon mb-4" />
+              <h3 className="text-xl font-medium text-echo-coffee dark:text-echo-cyber-neon mb-2">No memories yet</h3>
+              <p className="text-echo-coffee/70 dark:text-echo-cyber-neon/80 mb-6">
                 Create your first Soul bound Memory to start preserving what matters.
               </p>
               <Link to="/create/memory">
-                <Button className="bg-echo-rust hover:bg-echo-rust/90 text-white">
+                <Button className="bg-echo-rust hover:bg-echo-rust/90 dark:bg-echo-cyber-neon dark:hover:bg-echo-cyber-neon/90 text-white">
                   <Plus size={16} className="mr-2" />
                   Create Memory
                 </Button>

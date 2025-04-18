@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -54,9 +55,9 @@ export default {
         },
         echo: {
           dark: {
-            background: '#0a0a0a', // Darker background for dark mode
-            primary: '#1a1a1a', // Darker primary for dark mode
-            secondary: '#2a2a2a', // Darker secondary for dark mode
+            background: '#0a0a0a', // Very dark background
+            primary: '#1a1a1a', // Dark primary
+            secondary: '#2a2a2a', // Dark secondary
             accent: '#1E40AF', // Deep blue accent
             text: '#e0e0e0', // Light text for dark mode
             muted: '#4a4a4a' // Muted dark mode text
