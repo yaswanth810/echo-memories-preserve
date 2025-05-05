@@ -50,13 +50,13 @@ export function NFTCard({ nft }: NFTCardProps) {
   };
 
   return (
-    <div className="group relative bg-white dark:bg-echo-dark-secondary rounded-xl border border-echo-sepia/20 dark:border-echo-cyber-neon/20 overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer">
+    <div className="group relative bg-input dark:bg-echo-dark-secondary rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300 cursor-pointer">
       <Link to={`/nfts/${nft.id}`}>
         <div className="relative aspect-square">
           <img
             src={nft.imageUrl}
             alt={nft.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-full object-cover group-hover:scale-110 transition-all duration-300"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
           <div className="absolute top-3 left-3 flex gap-2">
@@ -80,22 +80,22 @@ export function NFTCard({ nft }: NFTCardProps) {
         </div>
       </Link>
 
-      <div className="p-4">
+      <div className="p-6">
         <Link to={`/nfts/${nft.id}`}>
-          <h3 className="text-lg font-semibold text-echo-coffee dark:text-echo-cyber-neon mb-2 line-clamp-1">
+          <h3 className="text-lg font-semibold text-foreground mb-2 line-clamp-1">
             {nft.title}
           </h3>
         </Link>
         
-        <p className="text-echo-coffee/70 dark:text-echo-cyber-neon/70 text-sm mb-4 line-clamp-2">
+        <p className="text-foreground/70 text-sm mb-4 line-clamp-2">
           {nft.description}
         </p>
 
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <div className="flex items-center gap-1 text-echo-coffee/70 dark:text-echo-cyber-neon/70">
+            <div className="flex items-center gap-1 text-foreground/70">
               <Heart size={16} />
-              <span className="text-sm">{nft.likes || 0}</span>
+              <span className="text-sm text-foreground/70">{nft.likes || 0}</span>
             </div>
             <div className="flex items-center gap-1 text-echo-coffee/70 dark:text-echo-cyber-neon/70">
               <Eye size={16} />
@@ -112,7 +112,7 @@ export function NFTCard({ nft }: NFTCardProps) {
 
         {nft.owner && (
           <div className="mt-4 pt-4 border-t border-echo-sepia/20 dark:border-echo-cyber-neon/20">
-            <p className="text-sm text-echo-coffee/70 dark:text-echo-cyber-neon/70">
+            <p className="text-sm text-foreground/70">
               Owned by: {`${nft.owner.slice(0, 6)}...${nft.owner.slice(-4)}`}
             </p>
           </div>

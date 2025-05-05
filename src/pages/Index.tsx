@@ -47,7 +47,7 @@ const Index = () => {
             description="Create immutable records of your most precious memories that can never be sold or transferred. Perfect for preserving family stories, personal milestones, and emotional moments that deserve to be remembered forever."
             icon={<BookMarked size={24} className="text-white" />}
             imageSrc="https://images.unsplash.com/photo-1456318019777-ccdc4d5b2396"
-            buttonLink="/create/memory"
+            buttonLink="/create-nft?type=soulbound"
             buttonText="Create a Memory"
             tags={["Family History", "Personal Milestones", "Private Sharing", "Immutable"]}
             color="bg-blue-500"
@@ -58,7 +58,7 @@ const Index = () => {
             description="Document and verify positive actions and real-world impact. Whether it's environmental work, community service, or acts of kindness, create an immutable record of the good you've contributed to the world."
             icon={<Award size={24} className="text-white" />}
             imageSrc="https://images.unsplash.com/photo-1559027615-cd4628902d4a"
-            buttonLink="/create/impact"
+            buttonLink="/create-nft?type=proofOfGood"
             buttonText="Document Impact"
             tags={["Social Impact", "Verification", "SDGs", "Community Work"]}
             color="bg-green-500"
@@ -69,7 +69,7 @@ const Index = () => {
             description="Preserve cultural artifacts, traditions, languages, and practices. Create NFTs that safeguard the richness of human heritage for future generations."
             icon={<Landmark size={24} className="text-white" />}
             imageSrc="https://images.unsplash.com/photo-1529070538774-1843cb3265df"
-            buttonLink="/create/heritage"
+            buttonLink="/create-nft?type=heritage"
             buttonText="Preserve Heritage"
             tags={["Culture", "Tradition", "Language", "Artifacts"]}
             color="bg-yellow-500"

@@ -4,6 +4,7 @@ import { Button } from '../components/ui/button';
 import { NFTGrid } from '../components/nft/NFTGrid';
 import { useBlockchain } from '../hooks/useBlockchain';
 import { NFT } from '../types/nft';
+import { useWallet } from '../hooks/useWallet';
 import { PlusIcon } from '@radix-ui/react-icons';
 
 export function HeritagePage() {
@@ -11,27 +12,28 @@ export function HeritagePage() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const { blockchainService } = useBlockchain();
+  const { address } = useWallet();
 
   useEffect(() => {
     const fetchHeritageNFTs = async () => {
       try {
-        const nfts = await blockchainService.getNFTsByType('heritage');
+        const nfts = await blockchainService.getNFTsByType('heritage', address);
         setHeritageNFTs(nfts);
       } catch (error) {
         console.error('Error fetching heritage NFTs:', error);
       } finally {
         setLoading(false);
       }
-    };
+    };    
 
     fetchHeritageNFTs();
-  }, [blockchainService]);
+  }, [blockchainService, address]);
 
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-4xl font-bold">Heritage NFTs</h1>
-        <Button onClick={() => navigate('/heritage/create')} className="flex items-center gap-2">
+        <Button onClick={() => navigate('/create-nft?type=heritage')} className="flex items-center gap-2">
           <PlusIcon className="h-4 w-4" />
           Create Heritage NFT
         </Button>

@@ -10,15 +10,14 @@ import { MemoriesPage } from './pages/MemoriesPage';
 import { ProofOfGoodPage } from './pages/ProofOfGoodPage';
 import { ExplorePage } from './pages/ExplorePage';
 import { WalletProvider } from './contexts/WalletContext';
-import { ThemeToggle } from './components/ThemeToggle';
 import { CreateMemory } from './pages/CreateMemory';
+import MarketplacePage from './pages/MarketplacePage';
 
 function App() {
   return (
     <WalletProvider>
       <Router>
         <Layout>
-          <ThemeToggle />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/nfts" element={<NFTPage />} />
@@ -26,10 +25,12 @@ function App() {
             <Route path="/create" element={<CreateNFTPage />} />
             <Route path="/create/memory" element={<CreateMemory />} />
             <Route path="/create-nft" element={<CreateNFTPage />} />
+            <Route path="/heritage/create" element={<CreateNFTPage />} />
             <Route path="/explore" element={<ExplorePage />} />
             <Route path="/heritage" element={<HeritagePage />} />
             <Route path="/memories" element={<MemoriesPage />} />
             <Route path="/proof-of-good" element={<ProofOfGoodPage />} />
+            <Route path="/marketplace" element={<MarketplacePage />} />
           </Routes>
           <Toaster position="top-right" />
         </Layout>

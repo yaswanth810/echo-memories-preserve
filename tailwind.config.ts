@@ -18,20 +18,20 @@ export default {
     },
     extend: {
       colors: {
-        background: "#121212", // Dark background
-        foreground: "#ffffff", // Light text
+        background: "#1e293b", // Dark background
+        foreground: "#f8fafc", // Light text
         muted: {
-          DEFAULT: "#2a2a2a", // Muted background
-          foreground: "#aaaaaa", // Muted text
+          DEFAULT: "#334155", // Muted background
+          foreground: "#f8fafc", // Muted text
         },
         accent: {
-          DEFAULT: "#1E40AF", // Deep blue accent
+          DEFAULT: "#8b5cf6", // Deep blue accent
           foreground: "var(--accent-foreground)",
-          90: "rgba(30, 64, 175, 0.9)", // 90% opacity
+          90: "rgba(139, 92, 246, 0.9)", // 90% opacity
         },
-        border: "#333333", // Border color
-        input: "#2a2a2a", // Input background
-        ring: "#4a90e2", // Focus ring
+        border: "#475569", // Border color
+        input: "#283141", // Input background
+        ring: "#6366f1", // Focus ring
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))'
@@ -54,18 +54,12 @@ export default {
         },
         echo: {
           dark: {
-            background: '#0a0a0a', // Very dark background
-            primary: '#1a1a1a', // Dark primary
-            secondary: '#2a2a2a', // Dark secondary
-            accent: '#1E40AF', // Deep blue accent
-            text: '#e0e0e0', // Light text for dark mode
-            muted: '#4a4a4a' // Muted dark mode text
-          },
-          cyber: {
-            neon: '#00FFE4', // Bright cyan
-            electric: '#FF6B6B', // Vibrant coral
-            circuit: '#4ECDC4', // Teal
-            glitch: '#FF9F1C' // Bright orange
+            background: '#1e293b', // Very dark background
+            primary: '#1e293b', // Dark primary
+            secondary: '#334155', // Dark secondary
+            accent: '#8b5cf6', // Deep blue accent
+            text: '#f8fafc', // Light text for dark mode
+            muted: '#475569' // Muted dark mode text
           }
         }
       },

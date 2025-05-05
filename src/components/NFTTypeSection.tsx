@@ -35,11 +35,11 @@ export function NFTTypeSection({
               <div className={`p-2 rounded-md ${color} animate-pulse-soft`}>
                 {icon}
               </div>
-              <h2 className="text-3xl font-semibold text-echo-coffee">{title}</h2>
+              <h2 className="text-3xl font-semibold text-foreground">{title}</h2>
             </div>
             
-            <p className="text-echo-coffee/80 mb-6 text-lg leading-relaxed">
-              {description}
+            <p className="text-foreground text-white mb-6 text-lg leading-relaxed">
+              <span className="">{description}</span>
             </p>
             
             {tags.length > 0 && (

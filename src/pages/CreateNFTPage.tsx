@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useBlockchain } from '../services/blockchain';
 import { CreateNFTData } from '../types/nft';
+import { useWallet } from '../hooks/useWallet';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Card } from '../components/ui/card';
@@ -12,6 +13,7 @@ import { toast } from 'react-hot-toast';
 export function CreateNFTPage() {
   const navigate = useNavigate();
   const blockchain = useBlockchain();
+  const { address } = useWallet();
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<CreateNFTData>({
     name: '',
@@ -31,6 +33,12 @@ export function CreateNFTPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('wallet address:', address)
+    if (!address || address === '') {
+      toast.error('Please connect your wallet first.');
+      return;
+    }
+
     setIsLoading(true);
 
     try {

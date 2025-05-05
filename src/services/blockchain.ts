@@ -1,7 +1,8 @@
 import { ethers, Contract } from 'ethers';
 import { NFT, Offer, Listing, CreateNFTData } from '../types/nft';
-import { useWallet } from '../contexts/WalletContext';
+import { useWallet } from '../hooks/useWallet';
 import { CONTRACT_ADDRESSES } from '../config/contracts';
+import { BigNumber } from 'ethers';
 
 // Contract ABIs
 const HERITAGE_ABI = [
@@ -53,11 +54,11 @@ export class BlockchainService {
   constructor() {
     if (typeof window !== "undefined" && window.ethereum) {
       try {
-        this.provider = new ethers.providers.Web3Provider(window.ethereum);
+        this.provider = new ethers.BrowserProvider(window.ethereum);
         this.signer = this.provider.getSigner();
       } catch (error) {
         console.error("Error initializing Web3Provider:", error);
-      }
+      }      
     } else {
       console.error("Ethereum provider not found. Please install MetaMask.");
     }
@@ -73,6 +74,13 @@ export class BlockchainService {
       throw new Error("Signer is not initialized. Please connect your wallet.");
     }
     return new ethers.Contract(address, abi, this.signer);
+  }
+
+  getContractProvider(address: string, abi: any) {
+    if (!this.provider) {
+      throw new Error("Provider is not initialized. Please install MetaMask.");
+    }
+    return new ethers.Contract(address, abi, this.provider);
   }
 
   private async getSigner(): Promise<ethers.JsonRpcSigner> {
@@ -121,11 +129,6 @@ export class BlockchainService {
         data.culturalSignificance || '',
         data.historicalContext || '',
         data.preservationStatus || '',
-        '',
-        '',
-        ethers.ZeroAddress,
-        '',
-        ''
       );
 
       const receipt = await tx.wait();
@@ -257,25 +260,23 @@ export class BlockchainService {
       throw new Error('Please install MetaMask or another Web3 wallet');
     }
 
-    const provider = new ethers.BrowserProvider(window.ethereum);
-    const accounts = await provider.send('eth_requestAccounts', []);
-    this.setProvider(provider, accounts[0]);
+    const provider = new ethers.BrowserProvider(window.ethereum)
+    const accounts = await provider.listAccounts();
+    this.setProvider(provider, await provider.getSigner());
     return accounts;
   }
 
   async getAccounts(): Promise<string[]> {
-    if (!window.ethereum) {
-      return [];
-    }
-
-    const provider = new ethers.BrowserProvider(window.ethereum);
-    return provider.send('eth_accounts', []);
+      if (!this.provider) {
+        return [];
+      }
+    return await this.provider.listAccounts();
   }
 
   async listNFT(nftContract: string, tokenId: string, price: string): Promise<void> {
     try {
       const contract = await this.getMarketplaceContract();
-      const signer = await this.getSigner();
+      const signer = this.signer;
       const contractWithSigner = contract.connect(signer) as ethers.Contract;
 
       const tx = await contractWithSigner.listNFT(
@@ -293,7 +294,7 @@ export class BlockchainService {
   async buyNFT(listingId: string, price: string): Promise<void> {
     try {
       const contract = await this.getMarketplaceContract();
-      const signer = await this.getSigner();
+      const signer = this.signer;
       const contractWithSigner = contract.connect(signer) as ethers.Contract;
 
       const tx = await contractWithSigner.buyNFT(listingId, {
@@ -309,7 +310,7 @@ export class BlockchainService {
   async cancelListing(listingId: string): Promise<void> {
     try {
       const contract = await this.getMarketplaceContract();
-      const signer = await this.getSigner();
+      const signer = this.signer;
       const contractWithSigner = contract.connect(signer) as ethers.Contract;
 
       const tx = await contractWithSigner.cancelListing(listingId);
@@ -323,11 +324,12 @@ export class BlockchainService {
   async makeOffer(listingId: string, price: string): Promise<void> {
     try {
       const contract = await this.getMarketplaceContract();
-      const signer = await this.getSigner();
+      const signer = this.signer;
       const contractWithSigner = contract.connect(signer) as ethers.Contract;
 
-      const tx = await contractWithSigner.makeOffer(listingId, {
-        value: ethers.parseEther(price)
+      const tx = await contractWithSigner.makeOffer(listingId, ethers.parseEther(price), 86400, { //duration 24hs
+
+        value: ethers.parseEther(price),
       });
       await tx.wait();
     } catch (error) {
@@ -339,7 +341,7 @@ export class BlockchainService {
   async acceptOffer(listingId: string, buyer: string): Promise<void> {
     try {
       const contract = await this.getMarketplaceContract();
-      const signer = await this.getSigner();
+      const signer = this.signer;
       const contractWithSigner = contract.connect(signer) as ethers.Contract;
 
       const tx = await contractWithSigner.acceptOffer(listingId, buyer);
@@ -353,7 +355,7 @@ export class BlockchainService {
   async cancelOffer(listingId: string): Promise<void> {
     try {
       const contract = await this.getMarketplaceContract();
-      const signer = await this.getSigner();
+      const signer = this.signer;
       const contractWithSigner = contract.connect(signer) as ethers.Contract;
 
       const tx = await contractWithSigner.cancelOffer(listingId);
@@ -364,28 +366,51 @@ export class BlockchainService {
     }
   }
 
-  async getNFTsForSale(): Promise<NFT[]> {
-    const marketplace = await this.getMarketplaceContract();
-    const listings = await marketplace.getListings();
-    const nfts: NFT[] = [];
-
-    for (const listingId of listings) {
-      const listing = await marketplace.getListing(listingId);
-      if (listing.active) {
-        const nft = await this.getNFT(listingId.toString(), 'heritage'); // Assuming heritage NFTs for now
-        nfts.push(nft);
-      }
+  async getMarketplaceListings(): Promise<Listing[]> {
+    try {
+      const marketplaceContract = await this.getMarketplaceContract();
+      const listingIds: BigNumber[] = await marketplaceContract.getListings();
+      const listingsPromises = listingIds.map(async (listingId) => {
+        const listing = await marketplaceContract.getListing(listingId);
+        return {
+          listingId: listingId.toString(),
+          seller: listing.seller,
+          price: ethers.formatEther(listing.price),
+          active: listing.active,
+          isAuction: listing.isAuction,
+          auctionEndTime: listing.auctionEndTime.toString(),
+          highestBid: ethers.formatEther(listing.highestBid),
+          highestBidder: listing.highestBidder,
+        };
+      });
+      const listings = await Promise.all(listingsPromises);
+      return listings;
+    } catch (error) {
+      console.error('Error getting marketplace listings:', error);
+      throw error;
     }
+  }
 
-    return nfts;
+  async getListing(listingId: string): Promise<Listing> {
+    try {
+      const marketplaceContract = await this.getMarketplaceContract();
+      const listing = await marketplaceContract.getListing(listingId);
+      return {
+        listingId: listingId,
+        seller: listing.seller,
+        price: ethers.formatEther(listing.price),
+      }
+    } catch (error) {
+      throw new Error('Error getting listing:');
+    }
   }
 
   async getNFTsByOwner(owner: string): Promise<NFT[]> {
-    const nfts: NFT[] = [];
+    if (!owner) return [];    const nfts: NFT[] = [];
     const types: ('heritage' | 'proofOfGood' | 'soulbound')[] = ['heritage', 'proofOfGood', 'soulbound'];
 
     for (const type of types) {
-      const contract = await this.getContract(CONTRACT_ADDRESSES[type], type === 'heritage' ? HERITAGE_ABI : type === 'proofOfGood' ? PROOF_OF_GOOD_ABI : SOULBOUND_ABI);
+      const contract = await this.getContractProvider(CONTRACT_ADDRESSES[type], type === 'heritage' ? HERITAGE_ABI : type === 'proofOfGood' ? PROOF_OF_GOOD_ABI : SOULBOUND_ABI);
       const balance = await contract.balanceOf(owner);
 
       for (let i = 0; i < balance; i++) {
@@ -396,6 +421,12 @@ export class BlockchainService {
     }
 
     return nfts;
+  }
+
+  async getNFTsByType(type: 'heritage' | 'proofOfGood' | 'soulbound', address:string): Promise<NFT[]> {
+    if (!address) return [];    
+    const allNFTs = await this.getNFTsByOwner(address);
+    return allNFTs.filter(nft => nft.type === type);
   }
 }
 

@@ -9,11 +9,11 @@ export function HomePage() {
       <HeroSection />
       
       <div className="container mx-auto px-4 py-12">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">Explore NFT Types</h2>
-          <p className="text-muted-foreground">
+        <div className="text-center mb-12 text-white">
+          <h2 className="text-3xl font-bold mb-4 text-foreground text-white">Explore NFT Types</h2>
+          <p className="text-foreground text-white">
             Discover different types of NFTs that preserve memories and document impact
-          </p>
+         </p>
         </div>
         
         <NFTTypeSection />

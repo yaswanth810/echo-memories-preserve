@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { ethers } from 'ethers';
 import { useToast } from '../hooks/useToast';
-import { BlockchainService, blockchainService } from "../services/blockchain";
+import { blockchainService } from "../services/blockchain";
 
 interface WalletContextType {
   address: string | null;
@@ -18,39 +18,22 @@ export function WalletProvider({ children }: { children: ReactNode }) {
   const [address, setAddress] = useState<string | null>(null);
   const [provider, setProvider] = useState<ethers.BrowserProvider | null>(null);
   const [signer, setSigner] = useState<ethers.JsonRpcSigner | null>(null);
-  const blockchainService = new BlockchainService();
 
   useEffect(() => {
-    // Check if wallet is already connected
-    const checkWalletConnection = async () => {
-      if (window.ethereum) {
-        try {
-          const provider = new ethers.BrowserProvider(window.ethereum);
-          const accounts = await provider.listAccounts();
-          if (accounts.length > 0) {
-            const signer = await provider.getSigner();
-            setAddress(accounts[0].address);
-            setProvider(provider);
-            setSigner(signer);
-            blockchainService.setProvider(provider, signer);
-          }
-        } catch (error) {
-          console.error("Error checking wallet connection:", error);
-        }
-      }
-    };
-
-    checkWalletConnection();
-
     // Listen for account changes
-    const handleAccountsChanged = (accounts: string[]) => {
+    const handleAccountsChanged = async (accounts: string[]) => {
       if (accounts.length === 0) {
         setAddress(null);
         setProvider(null);
         setSigner(null);
         blockchainService.setProvider(null, null);
       } else {
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();
         setAddress(accounts[0]);
+        setProvider(provider);
+        setSigner(signer);
+        blockchainService.setProvider(provider, signer);
       }
     };
 

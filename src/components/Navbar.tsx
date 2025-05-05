@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, BookMarked, Award, Landmark, Wallet, LogOut, Home } from "lucide-react";
-import { ThemeToggle } from "@/components/ThemeToggle";
+import { Menu, X, BookMarked, Award, Landmark, Wallet, LogOut, Home, Store } from "lucide-react";
 import { useWallet } from "@/hooks/useWallet";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence} from "framer-motion";
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -28,6 +27,7 @@ export function Navbar() {
     { to: "/memories", label: "Memories", icon: BookMarked },
     { to: "/proof-of-good", label: "Impact", icon: Award },
     { to: "/heritage", label: "Heritage", icon: Landmark },
+    { to: "/marketplace", label: "Marketplace", icon: Store },
   ];
 
   return (
