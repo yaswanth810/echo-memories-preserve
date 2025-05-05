@@ -1,15 +1,13 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
-  darkMode: ["class"],
+  darkMode: "class", // Enforce dark mode
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
   ],
-  prefix: "",
   theme: {
     container: {
       center: true,
@@ -20,11 +18,20 @@ export default {
     },
     extend: {
       colors: {
-        border: 'hsl(var(--border))',
-        input: 'hsl(var(--input))',
-        ring: 'hsl(var(--ring))',
-        background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
+        background: "#121212", // Dark background
+        foreground: "#ffffff", // Light text
+        muted: {
+          DEFAULT: "#2a2a2a", // Muted background
+          foreground: "#aaaaaa", // Muted text
+        },
+        accent: {
+          DEFAULT: "#1E40AF", // Deep blue accent
+          foreground: "var(--accent-foreground)",
+          90: "rgba(30, 64, 175, 0.9)", // 90% opacity
+        },
+        border: "#333333", // Border color
+        input: "#2a2a2a", // Input background
+        ring: "#4a90e2", // Focus ring
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))'
@@ -36,14 +43,6 @@ export default {
         destructive: {
           DEFAULT: 'hsl(var(--destructive))',
           foreground: 'hsl(var(--destructive-foreground))'
-        },
-        muted: {
-          DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))'
-        },
-        accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))'
         },
         popover: {
           DEFAULT: 'hsl(var(--popover))',

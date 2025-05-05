@@ -1,4 +1,3 @@
-
 import { ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
@@ -16,7 +15,7 @@ interface NFTTypeSectionProps {
   reverse?: boolean;
 }
 
-const NFTTypeSection = ({
+export function NFTTypeSection({
   title,
   description,
   icon,
@@ -26,7 +25,7 @@ const NFTTypeSection = ({
   tags = [],
   color,
   reverse = false
-}: NFTTypeSectionProps) => {
+}: NFTTypeSectionProps) {
   return (
     <section className={`py-16 ${reverse ? 'bg-echo-sepia/5' : ''}`}>
       <div className="container mx-auto px-4">
@@ -75,6 +74,4 @@ const NFTTypeSection = ({
       </div>
     </section>
   );
-};
-
-export default NFTTypeSection;
+}

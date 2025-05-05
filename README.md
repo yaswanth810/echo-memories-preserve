@@ -1,73 +1,58 @@
-# Welcome to your Lovable project
+# ECHO Marketplace
 
-## Project info
+A blockchain-based platform designed to help people preserve meaningful memories, document positive impact, and safeguard cultural heritage through specialized NFTs.
 
-**URL**: https://lovable.dev/projects/b4c076e1-d253-4987-bab1-b65af7c4de5f
+## Features
 
-## How can I edit this code?
+- **Soul bound Memories**: Personal, emotional NFTs that can never be sold or transferred
+- **Proof-of-Good NFTs**: Immutable records of positive actions and verified real-world impact
+- **Heritage NFTs**: Preservation of cultural artifacts, traditions, languages, and practices
 
-There are several ways of editing your application.
+## Tech Stack
 
-**Use Lovable**
+- **Frontend**: React, TypeScript, Tailwind CSS
+- **Blockchain**: Ethereum, Web3.js, Ethers.js
+- **Storage**: IPFS
+- **UI Components**: Radix UI, shadcn/ui
+- **State Management**: React Query
+- **Form Handling**: React Hook Form, Zod
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/b4c076e1-d253-4987-bab1-b65af7c4de5f) and start prompting.
+## Getting Started
 
-Changes made via Lovable will be committed automatically to this repo.
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-**Use your preferred IDE**
+## Project Structure
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```
+src/
+├── components/     # Reusable UI components
+├── hooks/         # Custom React hooks
+├── lib/          # Utility functions and configurations
+├── pages/        # Application pages
+├── services/     # API and blockchain services
+├── types/        # TypeScript type definitions
+└── utils/        # Helper functions
 ```
 
-**Edit a file directly in GitHub**
+## Development Phases
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+1. **Foundation**: Architecture design, smart contract development, core backend services
+2. **Core Functionality**: NFT creation flows, media handling, metadata management
+3. **Complete Features**: Verification systems, community validation tools
+4. **Polish & Launch**: UI/UX refinement, performance optimization, security auditing
 
-**Use GitHub Codespaces**
+## Contributing
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
 
-## What technologies are used for this project?
+## License
 
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/b4c076e1-d253-4987-bab1-b65af7c4de5f) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.

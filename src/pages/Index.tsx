@@ -1,4 +1,3 @@
-
 import Layout from "@/components/Layout";
 import HeroSection from "@/components/HeroSection";
 import NFTTypeSection from "@/components/NFTTypeSection";
@@ -41,40 +40,43 @@ const Index = () => {
   return (
     <Layout>
       <HeroSection />
-      
-      <NFTTypeSection
-        title="Soul bound Memories"
-        description="Create immutable records of your most precious memories that can never be sold or transferred. Perfect for preserving family stories, personal milestones, and emotional moments that deserve to be remembered forever."
-        icon={<BookMarked size={24} className="text-white" />}
-        imageSrc="https://images.unsplash.com/photo-1456318019777-ccdc4d5b2396"
-        buttonLink="/create/memory"
-        buttonText="Create a Memory"
-        tags={["Family History", "Personal Milestones", "Private Sharing", "Immutable"]}
-        color="bg-blue-500"
-      />
-      
-      <NFTTypeSection
-        title="Proof-of-Good NFTs"
-        description="Document and verify positive actions and real-world impact. Whether it's environmental work, community service, or acts of kindness, create an immutable record of the good you've contributed to the world."
-        icon={<Award size={24} className="text-white" />}
-        imageSrc="https://images.unsplash.com/photo-1559027615-cd4628902d4a"
-        buttonLink="/create/impact"
-        buttonText="Document Impact"
-        tags={["Social Impact", "Verification", "SDGs", "Community Work"]}
-        color="bg-green-500"
-        reverse={true}
-      />
-      
-      <NFTTypeSection
-        title="Heritage NFTs"
-        description="Preserve cultural artifacts, traditions, languages, and practices for future generations. Our community-validated approach ensures authentic representation and proper recognition of cultural significance."
-        icon={<Landmark size={24} className="text-white" />}
-        imageSrc="https://images.unsplash.com/photo-1594388052180-ebf0197eea2a"
-        buttonLink="/create/heritage"
-        buttonText="Preserve Heritage"
-        tags={["Cultural Preservation", "Traditions", "Community Validation", "Historical Context"]}
-        color="bg-amber-500"
-      />
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <NFTTypeSection
+            title="Soul Bound Memories"
+            description="Create immutable records of your most precious memories that can never be sold or transferred. Perfect for preserving family stories, personal milestones, and emotional moments that deserve to be remembered forever."
+            icon={<BookMarked size={24} className="text-white" />}
+            imageSrc="https://images.unsplash.com/photo-1456318019777-ccdc4d5b2396"
+            buttonLink="/create/memory"
+            buttonText="Create a Memory"
+            tags={["Family History", "Personal Milestones", "Private Sharing", "Immutable"]}
+            color="bg-blue-500"
+            reverse={false}
+          />
+          <NFTTypeSection
+            title="Proof-of-Good NFTs"
+            description="Document and verify positive actions and real-world impact. Whether it's environmental work, community service, or acts of kindness, create an immutable record of the good you've contributed to the world."
+            icon={<Award size={24} className="text-white" />}
+            imageSrc="https://images.unsplash.com/photo-1559027615-cd4628902d4a"
+            buttonLink="/create/impact"
+            buttonText="Document Impact"
+            tags={["Social Impact", "Verification", "SDGs", "Community Work"]}
+            color="bg-green-500"
+            reverse={true}
+          />
+          <NFTTypeSection
+            title="Heritage NFTs"
+            description="Preserve cultural artifacts, traditions, languages, and practices. Create NFTs that safeguard the richness of human heritage for future generations."
+            icon={<Landmark size={24} className="text-white" />}
+            imageSrc="https://images.unsplash.com/photo-1529070538774-1843cb3265df"
+            buttonLink="/create/heritage"
+            buttonText="Preserve Heritage"
+            tags={["Culture", "Tradition", "Language", "Artifacts"]}
+            color="bg-yellow-500"
+            reverse={false}
+          />
+        </div>
+      </section>
       
       <section className="py-16">
         <div className="container mx-auto px-4">

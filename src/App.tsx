@@ -1,43 +1,41 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
-import CreateMemory from "./pages/CreateMemory";
-import MemoriesPage from "./pages/MemoriesPage";
-import CreatePage from "./pages/CreatePage";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
+import { Layout } from './components/Layout';
+import { HomePage } from './pages/HomePage';
+import { NFTPage } from './pages/NFTPage';
+import { NFTDetailPage } from './pages/NFTDetailPage';
+import { CreateNFTPage } from './pages/CreateNFTPage';
+import { HeritagePage } from './pages/HeritagePage';
+import { MemoriesPage } from './pages/MemoriesPage';
+import { ProofOfGoodPage } from './pages/ProofOfGoodPage';
+import { ExplorePage } from './pages/ExplorePage';
+import { WalletProvider } from './contexts/WalletContext';
+import { ThemeToggle } from './components/ThemeToggle';
+import { CreateMemory } from './pages/CreateMemory';
 
-const queryClient = new QueryClient();
-
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          
-          {/* Memory routes */}
-          <Route path="/memories" element={<MemoriesPage />} />
-          <Route path="/create" element={<CreatePage />} />
-          <Route path="/create/memory" element={<CreateMemory />} />
-          
-          {/* These would be implemented next */}
-          <Route path="/proof-of-good" element={<NotFound />} />
-          <Route path="/heritage" element={<NotFound />} />
-          <Route path="/create/impact" element={<NotFound />} />
-          <Route path="/create/heritage" element={<NotFound />} />
-          <Route path="/explore" element={<NotFound />} />
-          
-          {/* Catch-all route */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+function App() {
+  return (
+    <WalletProvider>
+      <Router>
+        <Layout>
+          <ThemeToggle />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/nfts" element={<NFTPage />} />
+            <Route path="/nfts/:id" element={<NFTDetailPage />} />
+            <Route path="/create" element={<CreateNFTPage />} />
+            <Route path="/create/memory" element={<CreateMemory />} />
+            <Route path="/create-nft" element={<CreateNFTPage />} />
+            <Route path="/explore" element={<ExplorePage />} />
+            <Route path="/heritage" element={<HeritagePage />} />
+            <Route path="/memories" element={<MemoriesPage />} />
+            <Route path="/proof-of-good" element={<ProofOfGoodPage />} />
+          </Routes>
+          <Toaster position="top-right" />
+        </Layout>
+      </Router>
+    </WalletProvider>
+  );
+}
 
 export default App;
